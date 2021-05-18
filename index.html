@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" type="text/css" media="screen" />
+    <title>Cards</title>
+  </head>
+  <body>
+    <!--Design Card to my portfolio-->
+    <section class="custom_element">
+      <div class="card_inner">
+        <!--Card's Front-face-->
+        <div class="card_face card_face-front">
+          <a
+            href="https://mejiasasociados.cl/"
+            target="_blank"
+            class="img_container"
+          >
+            <img
+              class="card_face-image"
+              src="perfect_score_mejiasasociados.png"
+              alt="picture project"
+            />
+          </a>
+          <div class="card_description">
+            <a
+              href="https://mejiasasociados.cl/"
+              target="_blank"
+              class="project_name"
+              >Perfect Score Google Lighthouse</a
+            >
+            <div class="flip_container">
+              <p class="watch_project">My first nice project!</p>
+              <img
+                class="arrow"
+                src="img/arrow-circle-right-solid.svg"
+                alt="arrow icon"
+              />
+            </div>
+          </div>
+        </div>
+        <!--Card's Back-face-->
+        <div class="card_face card_face-back">
+          <p class="card_caption">
+            I needed one week to get done this project using
+            <strong>HTML, CSS and a little bit of JavaScript</strong>. And I
+            thought that I could make it better developing a
+            <strong>contact form</strong> so I watched a bunch of videos on
+            You-Tube and was able to create one
+            <strong>from zero using PHP.</strong><br />
+            I'm also proud of that logo made by myself
+            <strong>using FIGMA!</strong>
+            <em>
+              I copied the design from a png image and re-made the image againg
+              to use <strong>SVG format.</strong></em
+            ><br />
+            I did a research about loading web pages, performance and SEO to
+            make this project outstanding!
+          </p>
+        </div>
+      </div>
+    </section>
+    <!--End of the customed element-->
+    <script>
+      let arrowBtn = document.querySelector(".arrow");
+      let backCard = document.querySelector(".card_caption");
+      let projectCard = document.querySelector(".card_inner");
+
+      function flipCard() {
+        setTimeout(() => projectCard.classList.add("flipped"), 100);
+      }
+      function removeFlipCard() {
+        projectCard.classList.remove("flipped");
+      }
+
+      arrowBtn.addEventListener("click", flipCard);
+      backCard.addEventListener("click", removeFlipCard);
+    </script>
+  </body>
+</html>

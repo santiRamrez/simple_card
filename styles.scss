@@ -1,0 +1,122 @@
+@import "./variables";
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(./Montserrat/Montserrat-Medium.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+body {
+  @include size(100vw, 100vh);
+  @include flexCenter(column, center, center);
+}
+//convert this class to :host within the web component
+.custom_element {
+  display: block;
+  @include size(450px, 350px);
+  border-radius: 20px;
+  margin: 0 auto;
+  perspective: 1000px;
+
+  .flipped {
+    transform: rotateY(180deg);
+  }
+  .card_inner {
+    @include size(100%, 100%);
+    position: relative;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    transition: all 1.5s ease;
+
+    .card_face {
+      @include size(100%, 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backface-visibility: hidden;
+      overflow: hidden;
+      border-radius: 20px;
+      //background-color: #fff;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .card_face-front {
+      background-color: #f4f4f4;
+      position: relative;
+
+      .img_container {
+        @include flexCenter(column, center, center);
+        @include size(450px, 65%);
+        //Use a background-color of the image
+        background-color: #212121;
+
+        .card_face-image {
+          @include size(100%, auto);
+        }
+      }
+      .card_description {
+        margin: 0 auto;
+        @include size(100%, 35%);
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 20px;
+        @include flexCenter(column, space-evenly, space-evenly);
+
+        .project_name {
+          font-size: 22px;
+          font-weight: 300;
+          transition: 0.2s all ease-in-out;
+          cursor: pointer;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+          &:visited {
+            color: #202020;
+          }
+          &:active {
+            color: #202020;
+            transform: scale(0.99);
+          }
+        }
+        .flip_container {
+          @include flexCenter(row, space-between, center);
+
+          .watch_project {
+            font-size: 14px;
+          }
+          img {
+            @include size(40px, 40px);
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+
+            &:active {
+              transform: scale(0.9);
+            }
+          }
+        }
+      }
+    }
+    .card_face-back {
+      transform: rotateY(180deg);
+      background-color: #fff;
+
+      .card_caption {
+        width: 100%;
+        height: auto;
+        line-height: 25px;
+        padding: 25px 20px 0 20px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+}
