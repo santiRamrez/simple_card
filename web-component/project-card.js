@@ -65,16 +65,19 @@ class ProjectCard extends HTMLElement {
   }
   getStyles() {
     return `
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+      @font-face {
+        font-family: "Montserrat";
+        src: url(../Montserrat/Montserrat-Medium.ttf);
+      }
       :host {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat';
       }
       * {
         padding: 0;
         margin: 0;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat';
       }
       .custom_element {
         display: block;
@@ -247,11 +250,30 @@ class ProjectCard extends HTMLElement {
   render() {
     this.shadowRoot.appendChild(this.makeTemplate().content.cloneNode(true));
   }
+  getCard() {
+    let projectCard = this.shadowRoot.querySelector(".card_inner");
+    return projectCard;
+  }
+  flipCard() {
+    setTimeout(() => this.getCard().classList.add("flipped"), 100);
+  }
+  removeFlipCard() {
+    this.getCard().classList.remove("flipped");
+  }
+  /*************Connected Callback is requered!!************/
   connectedCallback() {
     //render template
     this.render();
-
     //use here addEventListeners
+    let arrowBtn = this.shadowRoot.querySelector(".arrow");
+    arrowBtn.addEventListener("click", () => {
+      this.flipCard();
+    });
+
+    let backCard = this.shadowRoot.querySelector(".card_caption");
+    backCard.addEventListener("click", () => {
+      this.removeFlipCard();
+    });
   }
   disconectedCallback() {
     //use here removeEventListeners
