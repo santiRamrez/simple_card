@@ -6,8 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The fucking component</title>
   </head>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url(../Montserrat/Montserrat-Medium.ttf);
+    }
+    body {
+      font-family: "Montserrat";
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
   <body>
-    <project-card></project-card>
+    <!--Use the attribute bgimage to fill the background-color of the image's container-->
+    <project-card
+      thename="qlq menol"
+      caption="My first nice project - 2020"
+      img="../perfect_score_mejiasasociados.png"
+      bgimg="#212121"
+    ></project-card>
     <script type="module" src="project-card.js"></script>
     <script>
       let card = document.querySelector("project-card");

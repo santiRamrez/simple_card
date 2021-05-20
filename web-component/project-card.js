@@ -1,7 +1,25 @@
 class ProjectCard extends HTMLElement {
+  //observer attributes goes first babe
+  static get observedAttributes() {
+    return ["thename", "caption", "img", "bgimg"];
+  }
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+  }
+  attributeChangedCallback(attr, oldVal, newVal) {
+    if (attr === "thename") {
+      this.thename = newVal;
+    }
+    if (attr === "caption") {
+      this.caption = newVal;
+    }
+    if (attr === "img") {
+      this.img = newVal;
+    }
+    if (attr === "bgimg") {
+      this.bgimg = newVal;
+    }
   }
   makeTemplate() {
     const template = document.createElement("template");
@@ -18,7 +36,7 @@ class ProjectCard extends HTMLElement {
           >
             <img
               class="card_face-image"
-              src="../perfect_score_mejiasasociados.png"
+              src="${this.img}"
               alt="picture project"
             />
           </a>
@@ -27,10 +45,10 @@ class ProjectCard extends HTMLElement {
               href="https://mejiasasociados.cl/"
               target="_blank"
               class="project_name"
-              >Perfect Score Google Lighthouse</a
+              >${this.thename}</a
             >
             <div class="flip_container">
-              <p class="watch_project">My first nice project!</p>
+              <p class="watch_project">${this.caption}</p>
               <img
                 class="arrow"
                 src="../img/arrow-circle-right-solid.svg"
@@ -65,43 +83,45 @@ class ProjectCard extends HTMLElement {
   }
   getStyles() {
     return `
-      @font-face {
-        font-family: "Montserrat";
-        src: url(../Montserrat/Montserrat-Medium.ttf);
-      }
-      :host {
-        font-family: 'Montserrat';
-      }
+
       * {
         padding: 0;
         margin: 0;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        font-family: 'Montserrat';
       }
       .custom_element {
+        font-size: 16px;
         display: block;
-        width: 450px;
-        height: 350px;
-        border-radius: 20px;
-        margin: 0 auto;
+        width: 28.125em;
+        height: 21.875em;
+        border-radius: 1.25em;
         -webkit-perspective: 1000px;
                 perspective: 1000px;
       }
+      @media (max-width: 480px) {
+        .custom_element {
+          font-size: 13px;
+          width: 315px;
+        }
+      }
+
       .custom_element .flipped {
         -webkit-transform: rotateY(180deg);
                 transform: rotateY(180deg);
       }
+
       .custom_element .card_inner {
         width: 100%;
         height: 100%;
         position: relative;
-        border-radius: 20px;
+        border-radius: 1.25em;
         -webkit-transform-style: preserve-3d;
                 transform-style: preserve-3d;
         -webkit-transition: all 1.5s ease;
         transition: all 1.5s ease;
       }
+
       .custom_element .card_inner .card_face {
         width: 100%;
         height: 100%;
@@ -113,9 +133,9 @@ class ProjectCard extends HTMLElement {
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
         overflow: hidden;
-        border-radius: 20px;
-        -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 1.25em;
+        -webkit-box-shadow: 0em 0.3125em 0.625em rgba(0, 0, 0, 0.25);
+                box-shadow: 0em 0.3125em 0.625em rgba(0, 0, 0, 0.25);
       }
 
       .custom_element .card_inner .card_face-front {
@@ -139,23 +159,25 @@ class ProjectCard extends HTMLElement {
         -webkit-box-align: center;
             -ms-flex-align: center;
                 align-items: center;
-        width: 450px;
+        width: 28.125em;
         height: 65%;
         background-color: #212121;
+        overflow: hidden;
       }
 
       .custom_element .card_inner .card_face-front .img_container .card_face-image {
         width: 100%;
         height: auto;
+        margin: auto;
       }
 
       .custom_element .card_inner .card_face-front .card_description {
         margin: 0 auto;
         width: 100%;
         height: 35%;
-        padding-left: 25px;
-        padding-right: 25px;
-        border-radius: 20px;
+        padding-left: 1.5625em;
+        padding-right: 1.5625em;
+        border-radius: 1.25em;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -174,8 +196,8 @@ class ProjectCard extends HTMLElement {
       }
 
       .custom_element .card_inner .card_face-front .card_description .project_name {
-        font-size: 22px;
-        font-weight: 300;
+        font-size: 1.375em;
+        font-weight: 500;
         -webkit-transition: 0.2s all ease-in-out;
         transition: 0.2s all ease-in-out;
         cursor: pointer;
@@ -215,12 +237,12 @@ class ProjectCard extends HTMLElement {
       }
 
       .custom_element .card_inner .card_face-front .card_description .flip_container .watch_project {
-        font-size: 14px;
+        font-size: 0.875em;
       }
 
       .custom_element .card_inner .card_face-front .card_description .flip_container img {
-        width: 40px;
-        height: 40px;
+        width: 2.5em;
+        height: 2.5em;
         cursor: pointer;
         -webkit-transition: 0.2s all ease-in-out;
         transition: 0.2s all ease-in-out;
@@ -240,9 +262,9 @@ class ProjectCard extends HTMLElement {
       .custom_element .card_inner .card_face-back .card_caption {
         width: 100%;
         height: auto;
-        line-height: 25px;
-        padding: 25px 20px 0 20px;
-        font-size: 14px;
+        line-height: 1.5625em;
+        padding: 1.5625em 1.25em 0 1.25em;
+        font-size: 0.875em;
         cursor: pointer;
       }
     `;
